@@ -21,6 +21,20 @@
             "name": "Test",
             "displayName": "Test Prop",
             "type": "text"
+        },
+        {}
+    ],
+    "childComponents": [
+        {
+            "name": "actions",
+            "displayName": "Actions",
+            "props": [
+                {
+                    "name": "useActions",
+                    "displayName": "Click Actions",
+                    "type": "action"
+                }
+            ]
         }
     ]
 }

@@ -26,5 +26,8 @@
     "react-art": "^16.6.0",
     "react-dom": "^16.9.0",
     "react-native-web": "^0.9.5"
+  },
+  "dependencies": {
+    "react-native-popup-menu": "^0.15.10"
   }
 }

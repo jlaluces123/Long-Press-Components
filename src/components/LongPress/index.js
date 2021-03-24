@@ -1,24 +1,106 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+
+// Components
+import {
+    MenuProvider,
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+    renderers,
+} from 'react-native-popup-menu';
+
+const { SlideInMenu } = renderers;
 
 class LongPress extends Component {
-	render() {
-		const { color, text } = this.props
+    state = {
+        menuOpen: false,
+    };
 
-		return (
-			<View style={styles.wrapper}>
-				<Text style={{ color }}>{text}</Text>
-			</View>
-		)
-	}
+    onLongPress = () => {
+        console.log('long press...');
+        this.menu.open();
+    };
+
+    onRegularPress = () => {
+        console.log('normal press...');
+    };
+
+    handleSelect = (option) => {
+        console.log('You Pressed: ', option);
+    };
+
+    handleClose = () => {
+        this.menu.close();
+    };
+
+    render() {
+        return (
+            <MenuProvider styles={styles.container}>
+                <TouchableOpacity
+                    onPress={this.onRegularPress}
+                    onLongPress={this.onLongPress}
+                >
+                    <View style={styles.rectangle}>
+                        <Text>Hello World</Text>
+                        <Menu
+                            ref={(c) => (this.menu = c)}
+                            name='rectangle'
+                            renderer={SlideInMenu}
+                            onSelect={(option) => this.handleSelect(option)}
+                        >
+                            <MenuTrigger text='⋮' />
+
+                            <MenuOptions customStyles={optionStyles}>
+                                <MenuOption
+                                    value={1}
+                                    text='Custom Option 1'
+                                ></MenuOption>
+                                <MenuOption
+                                    value={2}
+                                    text='Custom Option 2'
+                                ></MenuOption>
+                                <MenuOption
+                                    value={3}
+                                    text='Close Menu'
+                                    onSelect={this.handleClose}
+                                ></MenuOption>
+                            </MenuOptions>
+                        </Menu>
+                    </View>
+                </TouchableOpacity>
+            </MenuProvider>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-	wrapper: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	}
-})
+    container: {
+        height: '100vh',
+    },
+    rectangle: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#343434',
+        color: 'white',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        width: '100%',
+    },
+    menu: {
+        backgroundColor: 'blue',
+    },
+});
 
-export default LongPress
+const optionStyles = {
+    optionsContainer: {
+        padding: 5,
+    },
+};
+
+export default LongPress;
