@@ -48,11 +48,16 @@ class LongPress extends Component {
                             ref={(c) => (this.menu = c)}
                             name='rectangle'
                             renderer={SlideInMenu}
+                            rendererProps={{ placement: 'bottom' }}
                             onSelect={(option) => this.handleSelect(option)}
                         >
                             <MenuTrigger text='⋮' />
 
-                            <MenuOptions customStyles={optionStyles}>
+                            <MenuOptions
+                                optionsContainerStyle={{
+                                    backgroundColor: 'blue',
+                                }}
+                            >
                                 <MenuOption
                                     value={1}
                                     text='Custom Option 1'
